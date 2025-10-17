@@ -1,12 +1,12 @@
+let listaSorteados = [];
 let maximo = 10;
-let numeroAleatorio = gerarNumeroAleatorio(maximo);
+let numeroAleatorio = gerarNumeroAleatorio();
 let tentativas = 1;
 // ============================================================//
 // INÍCIO DO JOGO                                              //        
 // ============================================================//
-mensagemInicial(maximo);
+mensagemInicial();
 document.querySelector('input').max = maximo;
-
 // ============================================================//
 // FUNÇÕES                                                     //        
 // ============================================================//
@@ -43,12 +43,25 @@ function alteraTextoNaTag(tag, texto) {
     campo.innerHTML = texto;
 }
 
-function gerarNumeroAleatorio(limite) {
-    return Math.floor(Math.random() * limite) + 1;
+function gerarNumeroAleatorio() {
+    let numeroEscolhido = Math.floor(Math.random() * maximo) + 1;
+
+    let quantidadeSorteados = listaSorteados.length;
+    if (quantidadeSorteados == maximo) {
+        listaSorteados = [];
+    }
+
+    if (listaSorteados.includes(numeroEscolhido)) {
+        return gerarNumeroAleatorio();
+    } else {
+        listaSorteados.push(numeroEscolhido);
+        console.log('listaSorteados:', listaSorteados);
+        return numeroEscolhido;
+    }
 } 
 
-function mensagemInicial(max) {
+function mensagemInicial() {
     alteraTextoNaTag('h1', 'Jogo da Adivinhação');
-    let mensagem = `Escolha um número entre 1 e ${max}`;
+    let mensagem = `Escolha um número entre 1 e ${maximo}`;
     alteraTextoNaTag('p', mensagem);
 }
