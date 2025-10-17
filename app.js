@@ -1,9 +1,22 @@
-let title = document.querySelector('h1');
-title.innerHTML = 'Jodo da Adivinhação';
+let maximo = 10;
 
-let paragrafo = document.querySelector('p');
-paragrafo.innerHTML = 'Escolha um número entre 1 e 10';
+alteraTextoNaTag('h1', 'Jodo da Adivinhação');
+alteraTextoNaTag('p', 'Escolha um número entre 1 e ' + maximo);
 
+
+// ============================================================//
+// FUNÇÕES                                                     //        
+// ============================================================//
 function verificarChute() {
-    console.log('Função verificarChute foi chamada');
+    let chute = document.querySelector('input').value;
+    console.log(chute == gerarNumeroAleatorio(maximo));
 }
+
+function alteraTextoNaTag(tag, texto) {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto;
+}
+
+function gerarNumeroAleatorio(limite) {
+    return Math.floor(Math.random() * limite) + 1;
+}   
